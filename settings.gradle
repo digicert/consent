@@ -1,0 +1,3 @@
+rootProject.name = 'consent-backend'
+include 'consent-api'
+

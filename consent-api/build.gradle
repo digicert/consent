@@ -1,0 +1,67 @@
+buildscript {
+    ext {
+        sqlClientVersion = '8.0.31'
+        set('snakeyaml.version','1.32')
+        flywayVersion = '9.22.0'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://repo.dev.blu.digicert.com/repository/maven-public/" }
+    }
+
+    dependencies {
+        classpath "mysql:mysql-connector-java:${sqlClientVersion}"
+        classpath 'org.owasp:dependency-check-gradle:5.2.1'
+        classpath 'gradle.plugin.net.foragerr.jmeter:jmeter-gradle-plugin:1.1.0-4.0'
+    }
+}
+
+
+plugins {
+    id "org.flywaydb.flyway" version "$flywayVersion"
+    id "eclipse"
+    id("java-library")
+}
+
+allprojects {
+    apply plugin: 'java'
+    group = 'com.digicert'
+    sourceCompatibility = 17
+    targetCompatibility = 17
+}
+
+group 'com.digicert'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.6'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.6'
+    implementation 'org.hibernate:hibernate-annotations:3.5.6-Final'
+    compileOnly 'org.hibernate:hibernate-core:6.1.5.Final'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+
+}
+
+Properties prop = new Properties()
+prop.load(project.file("${rootDir}/db.properties").newDataInputStream())
+flyway {
+    driver = prop.getProperty('driver')
+    url = "${prop.getProperty('protocol')}://localhost:3306/${prop.getProperty('name')}??serverTimezone=UTC&zeroDateTimeBehavior=convertToNull"
+    user = prop.getProperty('username')
+    // This is compile-only local shared password, production env will use Vault-ed one
+    password = prop.getProperty('password')
+    locations = ['classpath:db/migration']
+    ignoreMigrationPatterns = ['*:missing','*:ignored']
+    skipDefaultCallbacks = true
+    placeholders = [
+            migrationsDir: "${rootDir}/src/main/resources/db/migration"
+    ]
+}
