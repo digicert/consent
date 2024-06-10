@@ -1,0 +1,10 @@
+locales:
+  - locale: "en_US"
+  - locale: "fr_FR"
+  - locale: "es_ES"
+  - locale: "de_DE"
+  - locale: "it_IT"
+  - locale: "pt_PT"
+  - locale: "nl_NL"
+  - locale: "pl_PL"
+  - locale: "ru_RU"

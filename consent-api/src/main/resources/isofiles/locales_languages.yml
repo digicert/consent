@@ -1,0 +1,13 @@
+localeLanguages:
+  - localeId: en
+    languageId: en_US
+  - localeId: fr
+    languageId: fr_FR
+  - localeId: es
+    languageId: es_ES
+  - localeId: de
+    languageId: de_DE
+  - localeId: it
+    languageId: it_IT
+  - localeId: pt
+    languageId: pt_PT

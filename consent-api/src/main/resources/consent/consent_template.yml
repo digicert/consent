@@ -1,0 +1,13 @@
+consentTemplate:
+  - localeLanguageId: en_US
+    title: "Consent Form"
+    content: |
+      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services
+  - localeLanguageId: fr_FR
+    title: "Formulaire de consentement"
+    content: |
+      Veuillez lire attentivement les termes et conditions suivants avant de signer. Ce formulaire de consentement est requis pour ...
+  - localeLanguageId: de_DE
+    title: "Einwilligungsformular"
+    content: |
+      Bitte lesen Sie die folgenden Bedingungen sorgfältig durch, bevor Sie unterschreiben. Dieses Einwilligungsformular ist erforderlich, um ...

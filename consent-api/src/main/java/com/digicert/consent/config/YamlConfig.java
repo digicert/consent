@@ -11,10 +11,28 @@ import org.springframework.core.io.ClassPathResource;
 public class YamlConfig {
 
     @Bean
-    public static PropertySourcesPlaceholderConfigurer properties() {
+    public static PropertySourcesPlaceholderConfigurer languageProperties() {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
         YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
-        yaml.setResources(new ClassPathResource("languages.yml"));
+        yaml.setResources(new ClassPathResource("isofiles/languages.yml"));
+        propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
+        return propertySourcesPlaceholderConfigurer;
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer localeProperties() {
+        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+        yaml.setResources(new ClassPathResource("isofiles/locales.yml"));
+        propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
+        return propertySourcesPlaceholderConfigurer;
+    }
+
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer localeLanguageProperties() {
+        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+        YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+        yaml.setResources(new ClassPathResource("isofiles/locales_languages.yml"));
         propertySourcesPlaceholderConfigurer.setProperties(yaml.getObject());
         return propertySourcesPlaceholderConfigurer;
     }

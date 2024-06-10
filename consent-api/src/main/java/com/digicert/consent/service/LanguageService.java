@@ -8,9 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.springframework.core.io.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
@@ -28,8 +26,7 @@ public class LanguageService {
 
     private final LanguageRepository languageRepository;
 
-    @Autowired
-    public LanguageService(ObjectMapper objectMapper, LanguageConfig languageConfig, LanguageRepository languageRepository) {
+    public LanguageService(LanguageConfig languageConfig, LanguageRepository languageRepository) {
         this.objectMapper = new ObjectMapper(new YAMLFactory());
         this.languageRepository = languageRepository;
         this.languages = languageConfig.getLanguages();
@@ -41,20 +38,25 @@ public class LanguageService {
     }
 
     public void reloadLanguages() throws IOException {
-        Resource resource = new ClassPathResource("languages.yml");
+        Resource resource = new ClassPathResource("isofiles/languages.yml");
         String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         LanguageConfig newConfig = objectMapper.readValue(yaml, LanguageConfig.class);
-
+        if (newConfig.getLanguages() != null) {
+            languages = newConfig.getLanguages();
+        }
         // Save the languages to the database
-        for (LanguageEntity language : languages) {
-            Optional<LanguageEntity> existingLanguage = languageRepository.findByIsoCode(language.getIsoCode());
-            if (existingLanguage.isPresent()) {
-                existingLanguage.get().setLanguage(language.getLanguage());
-                languageRepository.save(existingLanguage.get());
-            } else {
-                languageRepository.save(language);
+        if(languages != null && !languages.isEmpty()) {
+            for (LanguageEntity language : languages) {
+                Optional<LanguageEntity> existingLanguage = languageRepository.findByIsoCode(language.getIsoCode());
+                if (existingLanguage.isPresent()) {
+                    existingLanguage.get().setLanguage(language.getLanguage());
+                    languageRepository.save(existingLanguage.get());
+                } else {
+                    languageRepository.save(language);
+                }
             }
         }
+
     }
 
     public List<LanguageEntity> getLanguages() {
