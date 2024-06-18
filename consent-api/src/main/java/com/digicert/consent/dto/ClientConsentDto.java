@@ -4,9 +4,7 @@ import lombok.Data;
 
 @Data
 public class ClientConsentDto {
-    private String id;
-    private String productTemplateId;
+    private String productName;
     private String individualId;
-    private String date;
     private String outputReason;
 }

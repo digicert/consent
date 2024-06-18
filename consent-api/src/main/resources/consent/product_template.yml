@@ -1,0 +1,10 @@
+productTemplates:
+  - name: "Product 1"
+    language: "en"
+    locale: "en_US"
+    active: true
+  - name: "Product 2"
+    language: "fr"
+    locale: "fr_FR"
+    active: true
+

@@ -1,6 +1,7 @@
 package com.digicert.consent.service;
 
 import com.digicert.consent.config.LanguageLocaleConfig;
+import com.digicert.consent.config.initializer.CustomInitializer;
 import com.digicert.consent.entities.LanguageEntity;
 import com.digicert.consent.entities.LocaleEntity;
 import com.digicert.consent.entities.LocaleLanguageEntity;
@@ -9,6 +10,7 @@ import com.digicert.consent.repositories.LanguageRepository;
 import com.digicert.consent.repositories.LocaleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LanguageLocaleService {
+public class LanguageLocaleService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
 
@@ -42,12 +44,22 @@ public class LanguageLocaleService {
         this.localeRepository = localeRepository;
     }
 
-    @PostConstruct
+    /*@PostConstruct
+    @DependsOn({"languageService", "localeService"})
     public void loadLocaleLanguages() {
         try {
             reloadLocaleLanguages();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }*/
+
+    @Override
+    public void init() {
+        try {
+            reloadLocaleLanguages();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -85,4 +97,6 @@ public class LanguageLocaleService {
             }
         }
     }
+
+
 }

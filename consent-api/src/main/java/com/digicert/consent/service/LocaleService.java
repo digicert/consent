@@ -1,6 +1,7 @@
 package com.digicert.consent.service;
 
 import com.digicert.consent.config.LocaleConfig;
+import com.digicert.consent.config.initializer.CustomInitializer;
 import com.digicert.consent.entities.LocaleEntity;
 import com.digicert.consent.repositories.LocaleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LocaleService {
+public class LocaleService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
 
@@ -31,11 +32,19 @@ public class LocaleService {
         this.locales = localeConfig.getLocales();
     }
 
-    @PostConstruct
+    /*@PostConstruct
     public void loadLocales() throws IOException {
         reloadLocales();
-    }
+    }*/
 
+    @Override
+    public void init() {
+        try {
+            reloadLocales();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void reloadLocales() throws IOException {
         Resource resource = new ClassPathResource("isofiles/locales.yml");
         String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
@@ -60,5 +69,6 @@ public class LocaleService {
     public List<LocaleEntity> getLocales() {
         return localeRepository.findAll();
     }
+
 
 }

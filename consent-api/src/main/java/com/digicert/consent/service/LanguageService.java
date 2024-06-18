@@ -1,6 +1,7 @@
 package com.digicert.consent.service;
 
 import com.digicert.consent.config.LanguageConfig;
+import com.digicert.consent.config.initializer.CustomInitializer;
 import com.digicert.consent.dto.LanguageDto;
 import com.digicert.consent.entities.LanguageEntity;
 import com.digicert.consent.repositories.LanguageRepository;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LanguageService {
+public class LanguageService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
     private List<LanguageEntity> languages;
@@ -32,9 +33,18 @@ public class LanguageService {
         this.languages = languageConfig.getLanguages();
     }
 
-    @PostConstruct
+    /*@PostConstruct
     public void loadLanguages() throws IOException {
         reloadLanguages();
+    }*/
+
+    @Override
+    public void init() {
+        try {
+            reloadLanguages();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void reloadLanguages() throws IOException {
@@ -75,4 +85,6 @@ public class LanguageService {
             return null;
         }
     }
+
+
 }

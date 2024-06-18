@@ -31,6 +31,6 @@ public class ProductTemplateEntity {
     private String consentTemplateId;
 
     @Column(name = "active")
-    private String active;
+    private boolean active;
 
 }
