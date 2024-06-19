@@ -69,43 +69,49 @@ public class ConsentTemplateService implements CustomInitializer {
                     .readValue(yaml, ConsentTemplateConfig.class);
             List<ConsentModel> consentModels = consentTemplateConfig.getConsentTemplate();
             if (consentModels != null) {
-                for (ConsentModel consentModel : consentModels) {
-                    CreateOrUpdateConsentTemplate(consentModel);
-                }
-            } else {
-                throw new RuntimeException("Consent templates not found");
+                CreateOrUpdateConsentTemplate(consentModels);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void CreateOrUpdateConsentTemplate(ConsentModel consentModel) {
+    public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
+        for (ConsentModel consentModel : consentModels) {
+            Context context = new Context();
+            context.setVariable("title", consentModel.getTitle());
+            context.setVariable("content", consentModel.getContent());
+            context.setVariable("type", consentModel.getType());
 
-        Context context = new Context();
-        context.setVariable("title", consentModel.getTitle());
-        context.setVariable("content", consentModel.getContent());
+            String htmlContent = templateEngine.process("consent_template", context);
+            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent);
+            String pdfContentStr = Base64.getEncoder().encodeToString(pdfContent);
+            Optional<LocaleEntity> localeEntity = localeRepository.findByLocale(consentModel.getLocaleLanguageId());
+            Optional<LocaleLanguageEntity> languageLocale = languageLocaleRepository.findByLocaleId(localeEntity.get().getId());
+            List<ConsentTemplateEntity> existingTemplates = consentTemplateRepository.findByLocaleLanguageId(languageLocale.get().getId());
 
-        String htmlContent = templateEngine.process("consent_template", context);
-        byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent);
-        String pdfContentStr = Base64.getEncoder().encodeToString(pdfContent);
-        Optional<LocaleEntity> localeEntity = localeRepository.findByLocale(consentModel.getLocaleLanguageId());
-        Optional<LocaleLanguageEntity> languageLocale = languageLocaleRepository.findByLocaleId(localeEntity.get().getId());
-        Optional<ConsentTemplateEntity> existingTemplate = consentTemplateRepository.findByLocaleLanguageId(languageLocale.get().getId());
+            ConsentTemplateEntity consentTemplateEntity = null;
+            for (ConsentTemplateEntity template : existingTemplates) {
+                if (template.getType().equals(consentModel.getType())) {
+                    consentTemplateEntity = template;
+                    break;
+                }
+            }
 
-        ConsentTemplateEntity consentTemplateEntity;
-        if (existingTemplate.isPresent()) {
-            consentTemplateEntity = existingTemplate.get();
-            consentTemplateEntity.setTemplatePdf(pdfContentStr);
-        } else {
-            consentTemplateEntity = new ConsentTemplateEntity();
-            consentTemplateEntity.setTemplatePdf(pdfContentStr);
-            consentTemplateEntity.setLocaleLanguageId(languageLocale.get().getId());
+            if (consentTemplateEntity != null) {
+                // Update existing template
+                consentTemplateEntity.setTemplatePdf(pdfContentStr);
+            } else {
+                // Create new template
+                consentTemplateEntity = ConsentTemplateEntity.builder()
+                        .localeLanguageId(languageLocale.get().getId())
+                        .type(consentModel.getType())
+                        .templatePdf(pdfContentStr)
+                        .build();
+            }
+
+            consentTemplateRepository.save(consentTemplateEntity);
+
         }
-        consentTemplateRepository.save(consentTemplateEntity);
-
-
     }
-
-
 }

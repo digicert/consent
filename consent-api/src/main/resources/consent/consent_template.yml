@@ -2,12 +2,15 @@ consentTemplate:
   - localeLanguageId: en_US
     title: "Consent Form"
     content: |
-      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services
-  - localeLanguageId: fr_FR
-    title: "Formulaire de consentement"
+      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services auto template
+    type: "manual"
+  - localeLanguageId: en_US
+    title: "Consent Form"
     content: |
-      Veuillez lire attentivement les termes et conditions suivants avant de signer. Ce formulaire de consentement est requis pour ...
-  - localeLanguageId: de_DE
-    title: "Einwilligungsformular"
+      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services manual template
+    type: "auto"
+  - localeLanguageId: en_US
+    title: "Consent Form"
     content: |
-      Bitte lesen Sie die folgenden Bedingungen sorgfältig durch, bevor Sie unterschreiben. Dieses Einwilligungsformular ist erforderlich, um ...
+      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services both auto and manual
+    type: "both"

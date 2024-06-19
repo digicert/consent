@@ -10,5 +10,6 @@ public class ConsentModel {
     private String localeLanguageId;
     private String title;
     private String content;
+    private String type;
 
 }

@@ -94,28 +94,27 @@ public class ProductTemplateService implements CustomInitializer {
                     Optional<LocaleLanguageEntity> existingLocaleLanguages = languageLocaleRepository
                             .findByLanguageIdAndLocaleId(existingLanguages.get().getId(), existingLocales.get().getId());
                     if (existingLocaleLanguages.isPresent()) {
-                        Optional<ConsentTemplateEntity> consentTemplateEntity =
+                        List<ConsentTemplateEntity> consentTemplateEntity =
                                 consentTemplateRepository.findByLocaleLanguageId(existingLocaleLanguages.get().getId());
 
-                        if (consentTemplateEntity != null) {
+                        for (ConsentTemplateEntity consentTemplate : consentTemplateEntity) {
                             Optional<ProductEntity> product = productRepository.findByName(productTemplate.getName());
                             if (product.isPresent()) {
                                 Optional<ProductTemplateEntity> existingProductTemplate =
                                         productTemplateRepository
-                                                .findByConsentTemplateIdAndProductId(consentTemplateEntity.get().getId(), product.get().getId());
+                                                .findByConsentTemplateIdAndProductId(consentTemplate.getId(), product.get().getId());
                                 ProductTemplateEntity productTemplateEntity;
                                 if (existingProductTemplate.isPresent()) {
                                     productTemplateEntity = existingProductTemplate.get();
                                 } else {
                                     productTemplateEntity = new ProductTemplateEntity();
-                                    productTemplateEntity.setConsentTemplateId(consentTemplateEntity.get().getId());
+                                    productTemplateEntity.setConsentTemplateId(consentTemplate.getId());
                                     productTemplateEntity.setProductId(product.get().getId());
                                 }
                                 productTemplateEntity.setActive(productTemplate.isActive());
                                 productTemplateRepository.save(productTemplateEntity);
                             }
                         }
-
                     }
                 }
 

@@ -7,4 +7,5 @@ public class ConsentTemplateDto {
     private String id;
     private String localeLanguageId;
     private String templatePdf;
+    private String type;
 }

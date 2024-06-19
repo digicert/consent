@@ -30,4 +30,7 @@ public class ConsentTemplateEntity {
     @Column(name = "template_pdf")
     private String templatePdf;
 
+    @Column(name = "type")
+    private String type;
+
 }

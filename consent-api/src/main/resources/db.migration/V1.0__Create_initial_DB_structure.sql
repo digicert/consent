@@ -38,6 +38,7 @@ CREATE TABLE `consent_template`
     `id`                 varchar(36) NOT NULL,
     `locale_language_id` varchar(36) DEFAULT NULL,
     `template_pdf`       blob        DEFAULT NULL,
+    `type`               varchar(10) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `locale_language_id` (`locale_language_id`),
     CONSTRAINT `consent_template_ibfk_1` FOREIGN KEY (`locale_language_id`) REFERENCES `locale_language` (`id`)
