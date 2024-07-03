@@ -69,3 +69,14 @@ CREATE TABLE `client_consent`
     KEY `product_template_id` (`product_template_id`),
     CONSTRAINT `client_consent_ibfk_1` FOREIGN KEY (`product_template_id`) REFERENCES `product_template` (`id`)
 );
+
+CREATE TABLE `client_consent_metadata`
+(
+    `id`                  varchar(36) NOT NULL,
+    `client_consent_id`   varchar(36) DEFAULT NULL,
+    `metadata_key`        varchar(100) DEFAULT NULL,
+    `metadata_value`      varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `client_consent_id` (`client_consent_id`),
+    CONSTRAINT `client_consent_metadata_ibfk_1` FOREIGN KEY (`client_consent_id`) REFERENCES `client_consent` (`id`)
+);

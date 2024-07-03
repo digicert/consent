@@ -10,13 +10,11 @@ import com.digicert.consent.repositories.LanguageRepository;
 import com.digicert.consent.repositories.LocaleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -43,16 +41,6 @@ public class LanguageLocaleService implements CustomInitializer {
         this.languageRepository = languageRepository;
         this.localeRepository = localeRepository;
     }
-
-    /*@PostConstruct
-    @DependsOn({"languageService", "localeService"})
-    public void loadLocaleLanguages() {
-        try {
-            reloadLocaleLanguages();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @Override
     public void init() {

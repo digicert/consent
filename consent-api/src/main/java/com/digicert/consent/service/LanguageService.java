@@ -6,14 +6,12 @@ import com.digicert.consent.dto.LanguageDto;
 import com.digicert.consent.entities.LanguageEntity;
 import com.digicert.consent.repositories.LanguageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -32,11 +30,6 @@ public class LanguageService implements CustomInitializer {
         this.languageRepository = languageRepository;
         this.languages = languageConfig.getLanguages();
     }
-
-    /*@PostConstruct
-    public void loadLanguages() throws IOException {
-        reloadLanguages();
-    }*/
 
     @Override
     public void init() {

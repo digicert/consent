@@ -12,7 +12,6 @@ import com.digicert.consent.repositories.LocaleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import org.springframework.util.StreamUtils;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -38,7 +36,6 @@ public class ConsentTemplateService implements CustomInitializer {
 
     private final LanguageLocaleRepository languageLocaleRepository;
 
-
     @Autowired
     public ConsentTemplateService(ConsentTemplateRepository consentTemplateRepository,
                                   PdfService pdfService, SpringTemplateEngine templateEngine, LocaleRepository localeRepository,
@@ -49,12 +46,6 @@ public class ConsentTemplateService implements CustomInitializer {
         this.localeRepository = localeRepository;
         this.languageLocaleRepository = languageLocaleRepository;
     }
-
-    /*@PostConstruct
-    @DependsOn("localeService")
-    public void init() {
-        callCreateOrUpdateConsentTemplate();
-    }*/
 
     @Override
     public void init() {

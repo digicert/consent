@@ -11,7 +11,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -31,11 +30,6 @@ public class LocaleService implements CustomInitializer {
         this.localeRepository = localeRepository;
         this.locales = localeConfig.getLocales();
     }
-
-    /*@PostConstruct
-    public void loadLocales() throws IOException {
-        reloadLocales();
-    }*/
 
     @Override
     public void init() {

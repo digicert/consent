@@ -13,7 +13,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -33,11 +32,6 @@ public class ProductService implements CustomInitializer {
         this.products = productConfig.getProducts();
         this.productRepository = productRepository;
     }
-
-/*    @PostConstruct
-    public void loadProducts() throws IOException {
-        createOrUpdateProduct();
-    }*/
 
     @Override
     public void init() {

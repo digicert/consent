@@ -23,7 +23,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -64,11 +63,6 @@ public class ProductTemplateService implements CustomInitializer {
         this.productTemplateRepository = productTemplateRepository;
         this.productRepository = productRepository;
     }
-
-    /*@PostConstruct
-    public void loadProductTemplates() throws IOException{
-        createOrUpdateProductTemplate();
-    }*/
 
     @Override
     public void init() {
@@ -117,8 +111,6 @@ public class ProductTemplateService implements CustomInitializer {
                         }
                     }
                 }
-
-
             }
         }
     }
