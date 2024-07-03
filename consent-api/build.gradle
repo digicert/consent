@@ -19,7 +19,6 @@ buildscript {
 plugins {
     id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    id "org.flywaydb.flyway" version "$flywayVersion"
     id "eclipse"
     id("java-library")
 }
@@ -52,8 +51,6 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-
-
     implementation 'com.github.jknack:handlebars:4.3.1'
     implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     implementation 'org.projectlombok:lombok'
@@ -73,8 +70,6 @@ dependencies {
     implementation 'org.glassfish.jersey.core:jersey-server:2.31'
     implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'org.flywaydb:flyway-mysql'
-    implementation 'org.flywaydb:flyway-core'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.2'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -99,25 +94,6 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient:2.0.6.RELEASE'
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-
-
-
-}
-
-Properties prop = new Properties()
-prop.load(project.file("${rootDir}/db.properties").newDataInputStream())
-flyway {
-    driver = prop.getProperty('driver')
-    url = "${prop.getProperty('protocol')}://localhost:3306/${prop.getProperty('name')}??serverTimezone=UTC&zeroDateTimeBehavior=convertToNull"
-    user = prop.getProperty('username')
-    // This is compile-only local shared password, production env will use Vault-ed one
-    password = prop.getProperty('password')
-    locations = ['classpath:db/migration']
-    ignoreMigrationPatterns = ['*:missing','*:ignored']
-    skipDefaultCallbacks = true
-    placeholders = [
-            migrationsDir: "${rootDir}/src/main/resources/db/migration"
-    ]
 }
 
 sourceSets {
@@ -127,7 +103,6 @@ sourceSets {
         }
     }
 }
-
 
 repositories {
     mavenCentral()
