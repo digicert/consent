@@ -1,11 +1,11 @@
-CREATE TABLE `product`
+CREATE TABLE IF NOT EXISTS `product`
 (
     `id`   varchar(36)  NOT NULL,
     `name` varchar(100) NOT NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `locale`
+CREATE TABLE IF NOT EXISTS `locale`
 (
     `id`     varchar(36) NOT NULL,
     `locale` varchar(100) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `language`
     UNIQUE KEY `iso_code` (`iso_code`)
 );
 
-CREATE TABLE `locale_language`
+CREATE TABLE IF NOT EXISTS `locale_language`
 (
     `id`          varchar(36) NOT NULL,
     `locale_id`   varchar(36) DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `locale_language`
     CONSTRAINT `locale_language_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`)
 );
 
-CREATE TABLE `consent_template`
+CREATE TABLE IF NOT EXISTS `consent_template`
 (
     `id`                 varchar(36) NOT NULL,
     `locale_language_id` varchar(36) DEFAULT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `consent_template`
     CONSTRAINT `consent_template_ibfk_1` FOREIGN KEY (`locale_language_id`) REFERENCES `locale_language` (`id`)
 );
 
-CREATE TABLE `product_template`
+CREATE TABLE IF NOT EXISTS `product_template`
 (
     `id`                  varchar(36) NOT NULL,
     `product_id`          varchar(36) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `product_template`
     CONSTRAINT `product_template_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 );
 
-CREATE TABLE `client_consent`
+CREATE TABLE IF NOT EXISTS `client_consent`
 (
     `id`                  varchar(36) NOT NULL,
     `product_template_id` varchar(36)  DEFAULT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `client_consent`
     CONSTRAINT `client_consent_ibfk_1` FOREIGN KEY (`product_template_id`) REFERENCES `product_template` (`id`)
 );
 
-CREATE TABLE `client_consent_metadata`
+CREATE TABLE IF NOT EXISTS `client_consent_metadata`
 (
     `id`                  varchar(36) NOT NULL,
     `client_consent_id`   varchar(36) DEFAULT NULL,
