@@ -1,0 +1,135 @@
+{
+  "form": {
+    "fields": [
+      {
+        "element": "h2",
+        "type": "title",
+        "text": "Terms and conditions",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "content": "To provide you with digital certificates and trust services, DigiCert is required to gather personal data to verify your identity.",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "content": "For general information on how we use your personal data, see our {{1}}.",
+        "contentLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Privacy Notice",
+            "href": "https://www.digicert.com/digicert-privacy-policy",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "privacy_policy",
+        "name": "privacy_policy",
+        "value": "agree",
+        "label": "By checking this box, you agree to provide and allow us to process your government-issued identity documents and live and still facial images as part of our remote identity verification services. For additional information, view our {{1}}.",
+        "labelLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Remote Identity Verification Policy",
+            "href": "https://www.digicert.com/privacy-policy/remote-id-verification",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "master_tou",
+        "name": "master_tou",
+        "value": "agree",
+        "label": "By checking this box, you agree to the applicable {{1}} (including eIDAS, ZertES, and PKIoverheid) or {{2}}.",
+        "labelLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Qualified Certificates Terms of Use",
+            "href": "https://www.digicert.com/content/dam/digicert/pdfs/legal/qualified-certificates-terms-of-use.pdf",
+            "target": "_blank"
+          },
+          {
+            "placeholder": "{{2}}",
+            "text": "Certificate - Terms of Use",
+            "href": "https://www.digicert.com/content/dam/digicert/pdfs/legal/Certificate-Terms-of-Use.pdf",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "content": "If you have concerns about our automated remote identity verification processes or prefer to have face-to-face video verification with an expert, {{1}}.",
+        "contentLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "click here",
+            "href": "../biometric-consent/videoident-validation.php"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "button",
+        "type": "submit",
+        "text": "Accept",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      }
+    ]
+  }
+}

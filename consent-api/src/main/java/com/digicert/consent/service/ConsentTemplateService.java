@@ -68,41 +68,50 @@ public class ConsentTemplateService implements CustomInitializer {
     }
 
     public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
+
         for (ConsentModel consentModel : consentModels) {
-            Context context = new Context();
-            context.setVariable("title", consentModel.getTitle());
-            context.setVariable("content", consentModel.getContent());
-            context.setVariable("type", consentModel.getType());
+            try {
+                Context context = new Context();
+                context.setVariable("title", consentModel.getTitle());
+                context.setVariable("content", consentModel.getContent());
+                context.setVariable("type", consentModel.getType());
 
-            String htmlContent = templateEngine.process("consent_template", context);
-            byte[] pdfContent = pdfService.generatePdfFromHtml(htmlContent);
-            String pdfContentStr = Base64.getEncoder().encodeToString(pdfContent);
-            Optional<LocaleEntity> localeEntity = localeRepository.findByLocale(consentModel.getLocaleLanguageId());
-            Optional<LocaleLanguageEntity> languageLocale = languageLocaleRepository.findByLocaleId(localeEntity.get().getId());
-            List<ConsentTemplateEntity> existingTemplates = consentTemplateRepository.findByLocaleLanguageId(languageLocale.get().getId());
-
-            ConsentTemplateEntity consentTemplateEntity = null;
-            for (ConsentTemplateEntity template : existingTemplates) {
-                if (template.getType().equals(consentModel.getType())) {
-                    consentTemplateEntity = template;
-                    break;
+                Resource resource = new ClassPathResource("templates/"+consentModel.getType());
+                if (!resource.exists()) {
+                    throw new RuntimeException("Template not found: " + consentModel.getType());
                 }
+
+                String jsonTemplate = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+                Optional<LocaleEntity> localeEntity = localeRepository.findByLocale(consentModel.getLocaleLanguageId());
+                Optional<LocaleLanguageEntity> languageLocale = languageLocaleRepository.findByLocaleId(localeEntity.get().getId());
+                List<ConsentTemplateEntity> existingTemplates = consentTemplateRepository.findByLocaleLanguageId(languageLocale.get().getId());
+
+                ConsentTemplateEntity consentTemplateEntity = null;
+                for (ConsentTemplateEntity template : existingTemplates) {
+                    if (template.getType().equals(consentModel.getType())) {
+                        consentTemplateEntity = template;
+                        break;
+                    }
+                }
+
+                if (consentTemplateEntity != null) {
+                    // Update existing template
+                    consentTemplateEntity.setTemplateJson(jsonTemplate);
+                } else {
+                    // Create new template
+                    consentTemplateEntity = ConsentTemplateEntity.builder()
+                            .localeLanguageId(languageLocale.get().getId())
+                            .type(consentModel.getType())
+                            .templateJson(jsonTemplate)
+                            .build();
+                }
+
+                consentTemplateRepository.save(consentTemplateEntity);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
-            if (consentTemplateEntity != null) {
-                // Update existing template
-                consentTemplateEntity.setTemplatePdf(pdfContentStr);
-            } else {
-                // Create new template
-                consentTemplateEntity = ConsentTemplateEntity.builder()
-                        .localeLanguageId(languageLocale.get().getId())
-                        .type(consentModel.getType())
-                        .templatePdf(pdfContentStr)
-                        .build();
-            }
-
-            consentTemplateRepository.save(consentTemplateEntity);
-
-        }
     }
-}
+}}

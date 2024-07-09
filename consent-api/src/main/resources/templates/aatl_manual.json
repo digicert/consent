@@ -1,0 +1,181 @@
+{
+  "form": {
+    "fields": [
+      {
+        "element": "h2",
+        "type": "title",
+        "text": "Request video identity verification",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "text": "By continuing with expert-assisted video identity verification:",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "processing_delay",
+        "name": "processing_delay",
+        "value": "agree",
+        "label": "I understand there may be a delay in the processing of my identity.",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "processing_costs",
+        "name": "processing_costs",
+        "value": "agree",
+        "label": "I understand there may be additional costs to complete my request.",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "content": "Never mind, I want to {{1}}",
+        "contentLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Return to Remote Identity Validation",
+            "href": "#return-button",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "hr",
+        "type": "divider",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "h2",
+        "type": "title",
+        "text": "To request 24/7 identity verification service on video call, answer the question and review the terms below",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "master_tou",
+        "name": "master_tou",
+        "value": "agree",
+        "label": "By checking this box, you agree to the {{1}}.",
+        "labelLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "DigiCert Master Services Agreement",
+            "href": "https://www.digicert.com/master-services-agreement",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "select",
+        "type": "select",
+        "required": true,
+        "id": "reason",
+        "name": "reason",
+        "label": "Why are you choosing to opt out of Remote Identity Verification",
+        "endpoint": "",
+        "options": [
+          {
+            "value": "secure_person",
+            "label": "I feel more secure interacting with a person"
+          },
+          {
+            "value": "issues_automated_system",
+            "label": "I'm having issues with the automated system"
+          },
+          {
+            "value": "no_biometrics",
+            "label": "I don't want my biometrics captured"
+          },
+          {
+            "value": "no_answer",
+            "label": "I don't want to answer"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "button",
+        "type": "submit",
+        "id": "legal-accept-button",
+        "text": "Accept",
+        "disabled": true,
+        "tooltip": {
+          "text": "Check the box to proceed",
+          "position": "top"
+        },
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      }
+    ]
+  }
+}

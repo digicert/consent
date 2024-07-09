@@ -2,7 +2,10 @@ package com.digicert.consent.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,8 +30,8 @@ public class ConsentTemplateEntity {
     @Column(name = "locale_language_id")
     private String localeLanguageId;
 
-    @Column(name = "template_pdf")
-    private String templatePdf;
+    @Column(name = "template_json")
+    private String templateJson;
 
     @Column(name = "type")
     private String type;
