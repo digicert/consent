@@ -86,7 +86,7 @@ public class ConsentTemplateService implements CustomInitializer {
         }
     }
 
-    public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
+/*    public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
 
         for (ConsentModel consentModel : consentModels) {
             try {
@@ -133,6 +133,43 @@ public class ConsentTemplateService implements CustomInitializer {
             }
 
         }
+    }*/
+
+    public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
+        for (ConsentModel consentModel : consentModels) {
+            try {
+                Context context = new Context();
+                context.setVariable("title", consentModel.getTitle());
+                context.setVariable("content", consentModel.getContent());
+                context.setVariable("type", consentModel.getType());
+
+                Resource resource = new ClassPathResource("templates/"+consentModel.getType());
+                if (!resource.exists()) {
+                    throw new RuntimeException("Template not found: " + consentModel.getType());
+                }
+
+                String jsonTemplate = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+
+                // check if consent template entry exists if exists update else create
+                Optional<ConsentTemplateEntity> existingConsentTemplate = consentTemplateRepository.findByType(consentModel.getType());
+                if (existingConsentTemplate.isPresent()) {
+                    // update existing consent template
+                    existingConsentTemplate.get().setTemplateJson(jsonTemplate);
+                    consentTemplateRepository.save(existingConsentTemplate.get());
+                } else {
+                    // create new consent template
+                    ConsentTemplateEntity consentTemplateEntity = ConsentTemplateEntity.builder()
+                            .type(consentModel.getType())
+                            .templateJson(jsonTemplate)
+                            .build();
+                    consentTemplateRepository.save(consentTemplateEntity);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
     }
 
     public List<ProductTemplateDto> getActiveConsentTemplates(String name) {
