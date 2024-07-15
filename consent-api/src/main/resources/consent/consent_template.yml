@@ -1,10 +1,10 @@
 consentTemplate:
-  - localeLanguageId: en_US
+  - localeLanguageId: en_EU
     title: "eu_qualified_manual"
     content: |
       Please read the following terms and conditions carefully before sigining. This consent form is required to access the services auto template
     type: "eu_qualified_manual.json"
-  - localeLanguageId: en_US
+  - localeLanguageId: en_EU
     title: "eu_qualified_auto"
     content: |
       Please read the following terms and conditions carefully before sigining. This consent form is required to access the services manual template
@@ -14,3 +14,8 @@ consentTemplate:
     content: |
       Please read the following terms and conditions carefully before sigining. This consent form is required to access the services both auto and manual
     type: "aatl_auto.json"
+  - localeLanguageId: en_US
+    title: "aatl_manual"
+    content: |
+      Please read the following terms and conditions carefully before sigining. This consent form is required to access the services both auto and manual
+    type: "aatl_manual.json"

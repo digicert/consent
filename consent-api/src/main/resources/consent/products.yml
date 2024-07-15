@@ -1,5 +1,9 @@
 products:
-  - name: "Product 1"
-    description: "Product 1 description"
-  - name: "Product 2"
-    description: "Product 2 description"
+  - name: "eu_qualified_manual"
+    description: "eu qualified manual product"
+  - name: "eu_qualified_auto"
+    description: "eu manual product"
+  - name: "aatl_auto"
+    description: "aatl auto product"
+  - name: "aatl_manual"
+    description: "aatl manual product"

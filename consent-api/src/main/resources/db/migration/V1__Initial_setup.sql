@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `product_template`
     `product_id`          varchar(36) NOT NULL,
     `consent_template_id` varchar(36) NOT NULL,
     `active`              tinyint(1)  NOT NULL,
+    `template`            varchar(40) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `consent_template_id` (`consent_template_id`),
     KEY `product_id` (`product_id`),

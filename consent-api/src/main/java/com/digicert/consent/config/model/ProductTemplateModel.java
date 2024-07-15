@@ -11,5 +11,6 @@ public class ProductTemplateModel {
     private String language;
     private String locale;
     private boolean active;
+    private String template;
 
 }

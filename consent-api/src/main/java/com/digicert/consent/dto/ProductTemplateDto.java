@@ -1,11 +1,11 @@
 package com.digicert.consent.dto;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 @Data
 public class ProductTemplateDto {
-    private String id;
-    private String productId;
-    private String consentTemplateId;
-    private String active;
+    private String name;
+    private boolean active;
+    private JsonNode responseJson;
 }

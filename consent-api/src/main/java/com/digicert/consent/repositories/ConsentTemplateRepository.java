@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface ConsentTemplateRepository extends JpaRepository<ConsentTemplateEntity, String> {
     List<ConsentTemplateEntity> findByLocaleLanguageId(String localeLanguageId);
+
+    Optional<ConsentTemplateEntity> findByType(String type);
 }
