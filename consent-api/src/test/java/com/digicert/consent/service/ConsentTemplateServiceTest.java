@@ -1,7 +1,11 @@
 package com.digicert.consent.service;
 
+import com.digicert.consent.config.ConsentTemplateConfig;
+import com.digicert.consent.config.model.ConsentModel;
 import com.digicert.consent.dto.ProductTemplateDto;
 import com.digicert.consent.entities.ConsentTemplateEntity;
+import com.digicert.consent.entities.LocaleEntity;
+import com.digicert.consent.entities.LocaleLanguageEntity;
 import com.digicert.consent.entities.ProductEntity;
 import com.digicert.consent.entities.ProductTemplateEntity;
 import com.digicert.consent.repositories.ConsentTemplateRepository;
@@ -10,19 +14,31 @@ import com.digicert.consent.repositories.ProductTemplateRepository;
 import com.digicert.consent.service.ConsentTemplateService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.util.StreamUtils;
 
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -55,6 +71,7 @@ public class ConsentTemplateServiceTest {
     private ConsentTemplateEntity consentTemplateEntity;
     private JsonNode responseJson;
 
+
     @BeforeEach
     public void setUp() {
         // Initialize test data
@@ -73,6 +90,7 @@ public class ConsentTemplateServiceTest {
         consentTemplateEntity.setTemplateJson("{ \"key\": \"value\" }");
 
         responseJson = mock(JsonNode.class);
+
     }
 
     @Test
@@ -117,6 +135,15 @@ public class ConsentTemplateServiceTest {
         verifyNoMoreInteractions(productTemplateRepository, consentTemplateRepository, objectMapper);
     }
 
-
-
+    @Test
+    public void testCallCreateOrUpdateConsentTemplate() throws Exception {
+        Resource resource = new ClassPathResource("consent/consent_template.yml");
+        String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+        ConsentTemplateConfig consentTemplateConfig = new ObjectMapper(new YAMLFactory())
+                .readValue(yaml, ConsentTemplateConfig.class);
+        List<ConsentModel> consentModels = consentTemplateConfig.getConsentTemplate();
+        consentTemplateService.callCreateOrUpdateConsentTemplate();
+        // Assert with consentModels
+        assertNotNull(consentModels);
+        }
 }

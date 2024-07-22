@@ -71,7 +71,7 @@ public class ConsentTemplateService implements CustomInitializer {
         callCreateOrUpdateConsentTemplate();
     }
 
-    private void callCreateOrUpdateConsentTemplate() {
+    public void callCreateOrUpdateConsentTemplate() {
         try {
             Resource resource = new ClassPathResource("consent/consent_template.yml");
             String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
