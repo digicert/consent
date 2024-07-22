@@ -90,6 +90,13 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient:2.0.6.RELEASE'
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-core:3.6.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.6.0'
+    testImplementation 'org.mockito:mockito-inline:3.6.0'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'org.testcontainers:testcontainers:1.19.4'
+    testImplementation 'org.testcontainers:mariadb:1.19.4'
 }
 
 sourceSets {
@@ -113,6 +120,10 @@ flyway {
     placeholders = [
             migrationsDir: "${rootDir}/src/main/resources/db/migration",
     ]
+}
+
+test {
+    useJUnitPlatform()
 }
 
 repositories {
