@@ -33,4 +33,7 @@ public class ProductTemplateEntity {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "template")
+    private String template;
+
 }

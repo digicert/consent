@@ -73,7 +73,7 @@ public class ProductTemplateService implements CustomInitializer {
         }
     }
 
-    public void createOrUpdateProductTemplate() throws IOException {
+    /*public void createOrUpdateProductTemplate() throws IOException {
         Resource resource = new ClassPathResource("consent/product_template.yml");
         String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         ProductTemplateConfig newConfig = objectMapper.readValue(yaml, ProductTemplateConfig.class);
@@ -84,7 +84,8 @@ public class ProductTemplateService implements CustomInitializer {
             for (ProductTemplateModel productTemplate : productTemplates) {
                 Optional<LanguageEntity> existingLanguages = languageRepository.findByIsoCode(productTemplate.getLanguage());
                 Optional<LocaleEntity> existingLocales = LocaleRepository.findByLocale(productTemplate.getLocale());
-                if (existingLocales.isPresent() && existingLocales.isPresent()) {
+                String template = productTemplate.getTemplate();
+                if (existingLocales.isPresent()) {
                     Optional<LocaleLanguageEntity> existingLocaleLanguages = languageLocaleRepository
                             .findByLanguageIdAndLocaleId(existingLanguages.get().getId(), existingLocales.get().getId());
                     if (existingLocaleLanguages.isPresent()) {
@@ -104,11 +105,47 @@ public class ProductTemplateService implements CustomInitializer {
                                     productTemplateEntity = new ProductTemplateEntity();
                                     productTemplateEntity.setConsentTemplateId(consentTemplate.getId());
                                     productTemplateEntity.setProductId(product.get().getId());
+                                    productTemplateEntity.setTemplate(consentTemplate.getType());
                                 }
                                 productTemplateEntity.setActive(productTemplate.isActive());
                                 productTemplateRepository.save(productTemplateEntity);
                             }
                         }
+                    }
+                }
+            }
+        }
+    }*/
+
+    public void createOrUpdateProductTemplate() throws IOException {
+        Resource resource = new ClassPathResource("consent/product_template.yml");
+        String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+        ProductTemplateConfig newConfig = objectMapper.readValue(yaml, ProductTemplateConfig.class);
+        if (newConfig.getProductTemplates() != null) {
+            productTemplates = newConfig.getProductTemplates();
+        }
+        if(productTemplates != null && !productTemplates.isEmpty()) {
+            for (ProductTemplateModel productTemplate : productTemplates) {
+                // check if product template exists if exists update else create
+                List<ProductTemplateEntity> existingProductTemplates = productTemplateRepository
+                        .findAllByTemplateAndActive(productTemplate.getTemplate(), productTemplate.isActive());
+                Optional<ProductEntity> productEntity =
+                        productRepository.findByName(productTemplate.getName());
+                Optional<ConsentTemplateEntity> consentTemplateEntity =
+                        consentTemplateRepository.findByType(productTemplate.getTemplate());
+                if (existingProductTemplates.isEmpty() && productEntity.isPresent()) {
+                    // save a new product template
+                    productTemplateRepository.save(ProductTemplateEntity.builder()
+                            .productId(productEntity.get().getId())
+                            .consentTemplateId(consentTemplateEntity.get().getId())
+                            .active(productTemplate.isActive())
+                            .template(productTemplate.getTemplate())
+                            .build());
+                } else {
+                    // update existing product template
+                    for (ProductTemplateEntity existingProductTemplate : existingProductTemplates) {
+                        existingProductTemplate.setActive(productTemplate.isActive());
+                        productTemplateRepository.save(existingProductTemplate);
                     }
                 }
             }

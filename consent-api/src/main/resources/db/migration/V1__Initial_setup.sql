@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `consent_template`
 (
     `id`                 varchar(36) NOT NULL,
     `locale_language_id` varchar(36) DEFAULT NULL,
-    `template_pdf`       blob        DEFAULT NULL,
-    `type`               varchar(10) DEFAULT NULL,
+    `template_json`       blob        DEFAULT NULL,
+    `type`               varchar(36) DEFAULT NULL,
     PRIMARY KEY (`id`),
     KEY `locale_language_id` (`locale_language_id`),
     CONSTRAINT `consent_template_ibfk_1` FOREIGN KEY (`locale_language_id`) REFERENCES `locale_language` (`id`)
@@ -50,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `product_template`
     `product_id`          varchar(36) NOT NULL,
     `consent_template_id` varchar(36) NOT NULL,
     `active`              tinyint(1)  NOT NULL,
+    `template`            varchar(40) NOT NULL,
     PRIMARY KEY (`id`),
     KEY `consent_template_id` (`consent_template_id`),
     KEY `product_id` (`product_id`),

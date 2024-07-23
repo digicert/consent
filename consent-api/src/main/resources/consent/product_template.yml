@@ -1,10 +1,22 @@
 productTemplates:
-  - name: "Product 1"
+  - name: "eu_qualified_manual"
+    language: "en"
+    locale: "en_EU"
+    active: true
+    template: "eu_qualified_manual.json"
+  - name: "eu_qualified_auto"
+    language: "en"
+    locale: "en_EU"
+    active: true
+    template: "eu_qualified_auto.json"
+  - name: "aatl_auto"
     language: "en"
     locale: "en_US"
     active: true
-  - name: "Product 2"
-    language: "fr"
-    locale: "fr_FR"
+    template: "aatl_auto.json"
+  - name: "aatl_manual"
+    language: "en"
+    locale: "en_US"
     active: true
+    template: "aatl_manual.json"
 

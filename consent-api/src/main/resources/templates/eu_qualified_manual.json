@@ -1,0 +1,230 @@
+{
+  "form": {
+    "fields": [
+      {
+        "element": "h2",
+        "type": "title",
+        "text": "Request face-to-face verification",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "text": "By continuing with face-to-face verification:",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "required": true,
+        "id": "processing_delay",
+        "name": "processing_delay",
+        "value": "agree",
+        "label": "I understand there may be a delay in the processing of my identity.",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "id": "processing_costs",
+        "name": "processing_costs",
+        "value": "agree",
+        "label": "I understand there may be additional costs to complete my request.",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "p",
+        "type": "paragraph",
+        "content": "Never mind, I want to {{1}}",
+        "contentLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Return to Remote Identity Validation",
+            "href": "#return-button",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "hr",
+        "type": "divider",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "h2",
+        "type": "title",
+        "text": "Fill out this form to request face-to-face identity verification",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "input",
+        "type": "text",
+        "required": true,
+        "id": "first-name",
+        "name": "first_name",
+        "label": "First Name",
+        "placeholder": "",
+        "columns": {
+          "xs": 12,
+          "sm": 6,
+          "md": 6,
+          "lg": 6,
+          "xl": 6
+        }
+      },
+      {
+        "element": "input",
+        "type": "text",
+        "required": true,
+        "id": "last-name",
+        "name": "last_name",
+        "label": "Last Name",
+        "placeholder": "",
+        "columns": {
+          "xs": 12,
+          "sm": 6,
+          "md": 6,
+          "lg": 6,
+          "xl": 6
+        }
+      },
+      {
+        "element": "input",
+        "type": "email",
+        "required": true,
+        "id": "email",
+        "name": "email",
+        "label": "Your email address",
+        "placeholder": "",
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "select",
+        "type": "select",
+        "required": true,
+        "id": "country",
+        "name": "country",
+        "label": "Country",
+        "endpoint": "",
+        "options": [],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "select",
+        "type": "select",
+        "required": true,
+        "id": "country_code",
+        "name": "country_code",
+        "label": "Country code",
+        "endpoint": "",
+        "options": [],
+        "columns": {
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 4,
+          "xl": 4
+        }
+      },
+      {
+        "element": "input",
+        "type": "tel",
+        "id": "phone",
+        "name": "phone",
+        "label": "Phone",
+        "placeholder": "",
+        "required": true,
+        "columns": {
+          "xs": 12,
+          "sm": 8,
+          "md": 8,
+          "lg": 8,
+          "xl": 8
+        }
+      },
+      {
+        "element": "checkbox",
+        "type": "checkbox",
+        "id": "qual_tou",
+        "name": "qual_tou",
+        "value": "agree",
+        "label": "I have read and agree with the {{1}} that apply to the eIDAS, PKIoverheid, or Swiss Qualified Certificate requested.",
+        "labelLinks": [
+          {
+            "placeholder": "{{1}}",
+            "text": "Qualified Certificates Terms of Use",
+            "href": "https://www.digicert.com/content/dam/digicert/pdfs/legal/qualified-certificates-terms-of-use.pdf",
+            "target": "_blank"
+          }
+        ],
+        "columns": {
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      },
+      {
+        "element": "button",
+        "type": "submit",
+        "text": "Accept"
+      }
+    ]
+  }
+}
