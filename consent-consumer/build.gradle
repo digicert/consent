@@ -1,0 +1,10 @@
+description = 'consent-consumer'
+
+dependencies {
+    implementation project(':consent-api')
+}
+
+springBoot {
+    mainClass = 'com.digicert.consent.consumer.Main'
+}
+

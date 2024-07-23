@@ -1,3 +1,8 @@
+
 rootProject.name = 'consent-api'
-include 'consent-api'
+include ':consent-consumer'
+include ':consent-api'
+
+project(':consent-consumer').projectDir = "$rootDir/consent-consumer" as File
+project(':consent-api').projectDir = "$rootDir/consent-api" as File
 

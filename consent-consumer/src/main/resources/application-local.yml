@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: consent-consumer
+  kafka:
+    topics:
+      ivm-status: ivm.idNowStatusEvent
+    consumer:
+      bootstrap-servers: msgqueue01.dev.blu.digicert.com:9092,msgqueue02.dev.blu.digicert.com:9092,msgqueue03.dev.blu.digicert.com:9092
+      group-id: consent_consumer_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+consent:
+  api:
+    endpoints:
+      status: /consent/identity-provider/status

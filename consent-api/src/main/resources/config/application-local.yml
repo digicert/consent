@@ -2,7 +2,7 @@ spring:
   application:
     name: client-consent
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/app_consent?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mariadb://localhost:3306/app_consent?serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
     username: root
     password: asdasd
     driver-class-name: org.mariadb.jdbc.Driver
