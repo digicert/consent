@@ -214,5 +214,3 @@ subprojects {
 springBoot {
 	mainClass = 'com.digicert.consent.ConsentApiApplication'
 }
-
-
