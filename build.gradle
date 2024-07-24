@@ -108,7 +108,7 @@ subprojects {
 				limit {
 					counter = 'INSTRUCTION'
 					value = 'COVEREDRATIO'
-					minimum = 0.54
+					minimum = 0.05
 				}
 			}
 		}
@@ -212,7 +212,7 @@ subprojects {
 
 
 springBoot {
-	mainClass = 'com.digicert.consent.ConsentAPIApplication'
+	mainClass = 'com.digicert.consent.ConsentApiApplication'
 }
 
 

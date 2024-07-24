@@ -3,11 +3,8 @@ package com.digicert.consent.service;
 import com.digicert.consent.config.ConsentTemplateConfig;
 import com.digicert.consent.config.initializer.CustomInitializer;
 import com.digicert.consent.config.model.ConsentModel;
-import com.digicert.consent.dto.ConsentTemplateDto;
 import com.digicert.consent.dto.ProductTemplateDto;
 import com.digicert.consent.entities.ConsentTemplateEntity;
-import com.digicert.consent.entities.LocaleEntity;
-import com.digicert.consent.entities.LocaleLanguageEntity;
 import com.digicert.consent.entities.ProductEntity;
 import com.digicert.consent.entities.ProductTemplateEntity;
 import com.digicert.consent.repositories.ConsentTemplateRepository;
@@ -79,7 +76,7 @@ public class ConsentTemplateService implements CustomInitializer {
                     .readValue(yaml, ConsentTemplateConfig.class);
             List<ConsentModel> consentModels = consentTemplateConfig.getConsentTemplate();
             if (consentModels != null) {
-                CreateOrUpdateConsentTemplate(consentModels);
+                createOrUpdateConsentTemplate(consentModels);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -87,7 +84,7 @@ public class ConsentTemplateService implements CustomInitializer {
     }
 
 
-    public void CreateOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
+    public void createOrUpdateConsentTemplate(List<ConsentModel> consentModels) {
         for (ConsentModel consentModel : consentModels) {
             try {
                 Context context = new Context();
@@ -95,7 +92,7 @@ public class ConsentTemplateService implements CustomInitializer {
                 context.setVariable("content", consentModel.getContent());
                 context.setVariable("type", consentModel.getType());
 
-                Resource resource = new ClassPathResource("templates/"+consentModel.getType());
+                Resource resource = new ClassPathResource("templates/" + consentModel.getType());
                 if (!resource.exists()) {
                     throw new RuntimeException("Template not found: " + consentModel.getType());
                 }

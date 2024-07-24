@@ -25,9 +25,9 @@ public class IdProviderService {
         StatusEvent eventDetails = getEventDetails(message);
         Optional<IdProviderStatusEntity> foundEntityOpt = idProviderStatusRepository.findIdProviderStatusEntitiesByIdentId(eventDetails.getIdentId());
         if (foundEntityOpt.isPresent()) {
-           return updateStatusEntity(foundEntityOpt.get(), eventDetails);
+            return updateStatusEntity(foundEntityOpt.get(), eventDetails);
         } else {
-          return insertStatusEntity(eventDetails);
+            return insertStatusEntity(eventDetails);
         }
     }
 
@@ -38,7 +38,7 @@ public class IdProviderService {
     private Boolean updateStatusEntity(IdProviderStatusEntity foundEntity, StatusEvent eventDetails) {
         foundEntity.setStatus(eventDetails.getStatus());
         foundEntity.setStatusDate(Date.from(Instant.now()));
-        IdProviderStatusEntity savedEntity =  idProviderStatusRepository.save(foundEntity);
+        IdProviderStatusEntity savedEntity = idProviderStatusRepository.save(foundEntity);
         if (savedEntity.getStatus().equals(eventDetails.getStatus())) {
             notifyClient(eventDetails);
             return true;
@@ -48,7 +48,7 @@ public class IdProviderService {
     }
 
     private Boolean insertStatusEntity(StatusEvent eventDetails) {
-        IdProviderStatusEntity createdEntity =  idProviderStatusRepository.save(IdProviderStatusEntity.builder()
+        IdProviderStatusEntity createdEntity = idProviderStatusRepository.save(IdProviderStatusEntity.builder()
                 .identId(eventDetails.getIdentId())
                 .status(eventDetails.getStatus())
                 .statusDate(Date.from(Instant.now()))
@@ -65,7 +65,7 @@ public class IdProviderService {
     private StatusEvent getEventDetails(String message) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            IdentityProviderStatusEvent providerEvent =  mapper.readValue(message, IdentityProviderStatusEvent.class);
+            IdentityProviderStatusEvent providerEvent = mapper.readValue(message, IdentityProviderStatusEvent.class);
             return StatusEvent.builder()
                     .identId(providerEvent.getData().getIdentId())
                     .providerName(providerEvent.getData().getProviderName())

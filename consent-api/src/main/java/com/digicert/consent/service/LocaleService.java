@@ -20,10 +20,8 @@ import java.util.Optional;
 public class LocaleService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
-
-    private List<LocaleEntity> locales;
-
     private final LocaleRepository localeRepository;
+    private List<LocaleEntity> locales;
 
     public LocaleService(LocaleConfig localeConfig, LocaleRepository localeRepository) {
         this.objectMapper = new ObjectMapper(new YAMLFactory());
@@ -39,6 +37,7 @@ public class LocaleService implements CustomInitializer {
             throw new RuntimeException(e);
         }
     }
+
     public void reloadLocales() throws IOException {
         Resource resource = new ClassPathResource("isofiles/locales.yml");
         String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
@@ -46,7 +45,7 @@ public class LocaleService implements CustomInitializer {
         if (newConfig.getLocales() != null) {
             locales = newConfig.getLocales();
         }
-        if(locales != null && !locales.isEmpty()) {
+        if (locales != null && !locales.isEmpty()) {
             for (LocaleEntity locale : locales) {
                 Optional<LocaleEntity> existingLocales =
                         localeRepository.findByLocale(locale.getLocale());

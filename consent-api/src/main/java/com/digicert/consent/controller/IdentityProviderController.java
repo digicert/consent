@@ -17,6 +17,6 @@ public class IdentityProviderController {
 
     @PostMapping("/status")
     public ResponseEntity<Boolean> updateStatus(@RequestBody String message) {
-        return ResponseEntity.ok( idProviderService.updateIdProviderStatus(message));
+        return ResponseEntity.ok(idProviderService.updateIdProviderStatus(message));
     }
 }

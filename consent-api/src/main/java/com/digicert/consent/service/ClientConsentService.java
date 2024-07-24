@@ -43,7 +43,7 @@ public class ClientConsentService {
         if (products.isPresent()) {
             productTemplateRepository.findByProductId(products.get().getId())
                     .ifPresent(productTemplateEntity -> {
-                                clientConsentEntity.set(clientConsentRepository.save(ClientConsentEntity.builder()
+                        clientConsentEntity.set(clientConsentRepository.save(ClientConsentEntity.builder()
                                 .productTemplateId(productTemplateEntity.getId())
                                 .individualId(clientConsentDto.getIndividualId())
                                 .date(new Date())

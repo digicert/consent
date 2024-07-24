@@ -49,14 +49,14 @@ public class ProductTemplateService implements CustomInitializer {
 
     @Autowired
     public ProductTemplateService(ProductTemplateConfig productTemplateConfig,
-                                  LanguageRepository languageRepository, LocaleRepository LocaleRepository,
+                                  LanguageRepository languageRepository, LocaleRepository localeRepository,
                                   LanguageLocaleRepository languageLocaleRepository,
                                   ConsentTemplateRepository consentTemplateRepository,
                                   ProductTemplateRepository productTemplateRepository,
                                   ProductRepository productRepository) {
         this.objectMapper = new ObjectMapper(new YAMLFactory());
         this.languageRepository = languageRepository;
-        this.LocaleRepository = LocaleRepository;
+        this.LocaleRepository = localeRepository;
         this.languageLocaleRepository = languageLocaleRepository;
         this.consentTemplateRepository = consentTemplateRepository;
         this.productTemplates = productTemplateConfig.getProductTemplates();
@@ -124,7 +124,7 @@ public class ProductTemplateService implements CustomInitializer {
         if (newConfig.getProductTemplates() != null) {
             productTemplates = newConfig.getProductTemplates();
         }
-        if(productTemplates != null && !productTemplates.isEmpty()) {
+        if (productTemplates != null && !productTemplates.isEmpty()) {
             for (ProductTemplateModel productTemplate : productTemplates) {
                 // check if product template exists if exists update else create
                 List<ProductTemplateEntity> existingProductTemplates = productTemplateRepository

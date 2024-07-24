@@ -49,7 +49,7 @@ public class ProductService implements CustomInitializer {
         if (newConfig.getProducts() != null) {
             products = newConfig.getProducts();
         }
-        if(products != null && !products.isEmpty()) {
+        if (products != null && !products.isEmpty()) {
             for (ProductModel product : products) {
                 Optional<ProductEntity> existingProducts = productRepository.findByName(product.getName());
                 if (existingProducts.isPresent()) {

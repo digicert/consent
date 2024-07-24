@@ -48,6 +48,74 @@ allprojects {
 	}
 }
 
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	annotationProcessor 'org.projectlombok:lombok:1.18.32'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.2'
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
+	implementation 'com.github.jknack:handlebars:4.3.1'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	implementation 'org.projectlombok:lombok:1.18.32'
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-mail:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
+	implementation 'io.github.resilience4j:resilience4j-spring-boot2:2.1.0'
+	implementation "org.springframework.kafka:spring-kafka:${springKafkaVersion}"
+	implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.15.0'
+	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.15.0'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.0'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+	implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.15.0'
+	implementation 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.15.0'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.15.0'
+	implementation 'org.glassfish.jersey.core:jersey-server:2.31'
+	implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
+	implementation 'org.springframework.cloud:spring-cloud-context:3.1.1'
+	implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
+	implementation 'org.apache.pdfbox:pdfbox:2.0.27'
+	implementation 'org.apache.logging.log4j:log4j-to-slf4j:2.20.0'
+	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+	implementation 'org.apache.commons:commons-collections4:4.3'
+	implementation 'io.split.client:java-client:4.7.0'
+	implementation 'com.github.jknack:handlebars:4.3.1'
+	implementation 'org.owasp.encoder:encoder:1.2.2'
+	implementation 'com.lowagie:itext:2.1.7'
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+	implementation "org.springframework.boot:spring-boot-starter-websocket:${springBootVersion}"
+	implementation 'org.webjars:sockjs-client:1.0.2'
+	implementation 'org.webjars:webjars-locator-core:0.44'
+
+
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.6.RELEASE'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient:2.0.6.RELEASE'
+	testImplementation 'junit:junit:4.13.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+	testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
+	testImplementation 'org.powermock:powermock-module-junit4:2.0.9'
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+	testImplementation "org.springframework.security:spring-security-test:6.2.3"
+	testImplementation 'org.mockito:mockito-core:3.6.0'
+	testImplementation 'org.mockito:mockito-junit-jupiter:3.6.0'
+	testImplementation 'org.mockito:mockito-inline:3.6.0'
+	testImplementation 'org.assertj:assertj-core:3.24.2'
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+	testImplementation 'org.apache.kafka:kafka-clients:2.8.0'
+	testImplementation 'org.testcontainers:testcontainers:1.19.4'
+	testImplementation 'org.testcontainers:mariadb:1.19.4'
+}
+
 ext {
 	snippetsDir = file('build/generated-snippets')
 }
@@ -212,7 +280,7 @@ subprojects {
 
 
 springBoot {
-	mainClass = 'com.digicert.consent.ConsentAPIApplication'
+	mainClass = 'com.digicert.consent.ConsentApiApplication'
 }
 
 
