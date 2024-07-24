@@ -21,9 +21,8 @@ import java.util.Optional;
 public class LanguageService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
-    private List<LanguageEntity> languages;
-
     private final LanguageRepository languageRepository;
+    private List<LanguageEntity> languages;
 
     public LanguageService(LanguageConfig languageConfig, LanguageRepository languageRepository) {
         this.objectMapper = new ObjectMapper(new YAMLFactory());
@@ -48,7 +47,7 @@ public class LanguageService implements CustomInitializer {
             languages = newConfig.getLanguages();
         }
         // Save the languages to the database
-        if(languages != null && !languages.isEmpty()) {
+        if (languages != null && !languages.isEmpty()) {
             for (LanguageEntity language : languages) {
                 Optional<LanguageEntity> existingLanguage = languageRepository.findByIsoCode(language.getIsoCode());
                 if (existingLanguage.isPresent()) {

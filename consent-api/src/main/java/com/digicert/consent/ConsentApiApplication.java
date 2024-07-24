@@ -13,10 +13,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication
 @EnableConfigurationProperties({LanguageConfig.class, LocaleConfig.class,
-        LanguageLocaleConfig.class, ConsentTemplateConfig.class, ProductConfig.class,
-        ProductTemplateConfig.class})
-public class ConsentAPIApplication {
+    LanguageLocaleConfig.class, ConsentTemplateConfig.class, ProductConfig.class,
+    ProductTemplateConfig.class})
+public class ConsentApiApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConsentAPIApplication.class, args);
+        SpringApplication.run(ConsentApiApplication.class, args);
     }
 }

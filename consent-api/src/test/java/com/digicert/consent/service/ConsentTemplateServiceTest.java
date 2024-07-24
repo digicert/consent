@@ -135,5 +135,5 @@ public class ConsentTemplateServiceTest {
         consentTemplateService.callCreateOrUpdateConsentTemplate();
         // Assert with consentModels
         assertNotNull(consentModels);
-        }
+    }
 }

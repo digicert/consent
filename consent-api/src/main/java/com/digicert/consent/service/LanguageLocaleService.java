@@ -24,14 +24,10 @@ import java.util.Optional;
 public class LanguageLocaleService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
-
-    private List<LocaleLanguageEntity> localeLanguages;
-
     private final LanguageLocaleRepository languageLocaleRepository;
-
     private final LanguageRepository languageRepository;
-
     private final LocaleRepository localeRepository;
+    private List<LocaleLanguageEntity> localeLanguages;
 
     public LanguageLocaleService(LanguageLocaleConfig languageLocaleConfig, LanguageLocaleRepository languageLocaleRepository,
                                  LanguageRepository languageRepository, LocaleRepository localeRepository) {
@@ -58,7 +54,7 @@ public class LanguageLocaleService implements CustomInitializer {
         if (newConfig.getLocaleLanguages() != null) {
             localeLanguages = newConfig.getLocaleLanguages();
         }
-        if(localeLanguages != null && !localeLanguages.isEmpty()) {
+        if (localeLanguages != null && !localeLanguages.isEmpty()) {
             for (LocaleLanguageEntity localeLanguage : localeLanguages) {
                 // Get the existing language id using iso code
                 Optional<LanguageEntity> languageEntity =

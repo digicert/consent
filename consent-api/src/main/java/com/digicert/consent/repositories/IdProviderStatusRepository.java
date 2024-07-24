@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface IdProviderStatusRepository extends JpaRepository<IdProviderStatusEntity, String> {
 
-   Optional<IdProviderStatusEntity> findIdProviderStatusEntitiesByIdentId(String identId);
+    Optional<IdProviderStatusEntity> findIdProviderStatusEntitiesByIdentId(String identId);
 
 }
