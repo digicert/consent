@@ -4,9 +4,6 @@ import com.digicert.consent.config.ProductTemplateConfig;
 import com.digicert.consent.config.initializer.CustomInitializer;
 import com.digicert.consent.config.model.ProductTemplateModel;
 import com.digicert.consent.entities.ConsentTemplateEntity;
-import com.digicert.consent.entities.LanguageEntity;
-import com.digicert.consent.entities.LocaleEntity;
-import com.digicert.consent.entities.LocaleLanguageEntity;
 import com.digicert.consent.entities.ProductEntity;
 import com.digicert.consent.entities.ProductTemplateEntity;
 import com.digicert.consent.repositories.ConsentTemplateRepository;
@@ -33,12 +30,6 @@ public class ProductTemplateService implements CustomInitializer {
 
     private final ObjectMapper objectMapper;
 
-    private final LanguageRepository languageRepository;
-
-    private final LocaleRepository LocaleRepository;
-
-    private final LanguageLocaleRepository languageLocaleRepository;
-
     private final ConsentTemplateRepository consentTemplateRepository;
 
     private final ProductTemplateRepository productTemplateRepository;
@@ -55,9 +46,6 @@ public class ProductTemplateService implements CustomInitializer {
                                   ProductTemplateRepository productTemplateRepository,
                                   ProductRepository productRepository) {
         this.objectMapper = new ObjectMapper(new YAMLFactory());
-        this.languageRepository = languageRepository;
-        this.LocaleRepository = localeRepository;
-        this.languageLocaleRepository = languageLocaleRepository;
         this.consentTemplateRepository = consentTemplateRepository;
         this.productTemplates = productTemplateConfig.getProductTemplates();
         this.productTemplateRepository = productTemplateRepository;
@@ -72,50 +60,6 @@ public class ProductTemplateService implements CustomInitializer {
             throw new RuntimeException(e);
         }
     }
-
-    /*public void createOrUpdateProductTemplate() throws IOException {
-        Resource resource = new ClassPathResource("consent/product_template.yml");
-        String yaml = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-        ProductTemplateConfig newConfig = objectMapper.readValue(yaml, ProductTemplateConfig.class);
-        if (newConfig.getProductTemplates() != null) {
-            productTemplates = newConfig.getProductTemplates();
-        }
-        if(productTemplates != null && !productTemplates.isEmpty()) {
-            for (ProductTemplateModel productTemplate : productTemplates) {
-                Optional<LanguageEntity> existingLanguages = languageRepository.findByIsoCode(productTemplate.getLanguage());
-                Optional<LocaleEntity> existingLocales = LocaleRepository.findByLocale(productTemplate.getLocale());
-                String template = productTemplate.getTemplate();
-                if (existingLocales.isPresent()) {
-                    Optional<LocaleLanguageEntity> existingLocaleLanguages = languageLocaleRepository
-                            .findByLanguageIdAndLocaleId(existingLanguages.get().getId(), existingLocales.get().getId());
-                    if (existingLocaleLanguages.isPresent()) {
-                        List<ConsentTemplateEntity> consentTemplateEntity =
-                                consentTemplateRepository.findByLocaleLanguageId(existingLocaleLanguages.get().getId());
-
-                        for (ConsentTemplateEntity consentTemplate : consentTemplateEntity) {
-                            Optional<ProductEntity> product = productRepository.findByName(productTemplate.getName());
-                            if (product.isPresent()) {
-                                Optional<ProductTemplateEntity> existingProductTemplate =
-                                        productTemplateRepository
-                                                .findByConsentTemplateIdAndProductId(consentTemplate.getId(), product.get().getId());
-                                ProductTemplateEntity productTemplateEntity;
-                                if (existingProductTemplate.isPresent()) {
-                                    productTemplateEntity = existingProductTemplate.get();
-                                } else {
-                                    productTemplateEntity = new ProductTemplateEntity();
-                                    productTemplateEntity.setConsentTemplateId(consentTemplate.getId());
-                                    productTemplateEntity.setProductId(product.get().getId());
-                                    productTemplateEntity.setTemplate(consentTemplate.getType());
-                                }
-                                productTemplateEntity.setActive(productTemplate.isActive());
-                                productTemplateRepository.save(productTemplateEntity);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
 
     public void createOrUpdateProductTemplate() throws IOException {
         Resource resource = new ClassPathResource("consent/product_template.yml");
