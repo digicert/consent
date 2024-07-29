@@ -33,7 +33,7 @@ import java.util.Optional;
 public class ConsentTemplateService implements CustomInitializer {
 
     private final ConsentTemplateRepository consentTemplateRepository;
-    private final PdfService pdfService;
+
     private final SpringTemplateEngine templateEngine;
 
     private final LocaleRepository localeRepository;
@@ -48,13 +48,12 @@ public class ConsentTemplateService implements CustomInitializer {
 
     @Autowired
     public ConsentTemplateService(ConsentTemplateRepository consentTemplateRepository,
-                                  PdfService pdfService, SpringTemplateEngine templateEngine, LocaleRepository localeRepository,
+                                  SpringTemplateEngine templateEngine, LocaleRepository localeRepository,
                                   LanguageLocaleRepository languageLocaleRepository,
                                   ProductTemplateRepository productTemplateRepository,
                                   ProductRepository productRepository,
                                   ObjectMapper objectMapper) {
         this.consentTemplateRepository = consentTemplateRepository;
-        this.pdfService = pdfService;
         this.templateEngine = templateEngine;
         this.localeRepository = localeRepository;
         this.languageLocaleRepository = languageLocaleRepository;
