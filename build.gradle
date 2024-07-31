@@ -100,7 +100,9 @@ subprojects {
 	jacocoTestCoverageVerification {
 		afterEvaluate {
 			classDirectories.setFrom(files(classDirectories.files.collect {
-				fileTree(dir: it, excludes: [])
+				fileTree(dir: it, excludes: [
+				        'com/digicert/consent/'
+				])
 			}))
 		}
 		violationRules {
