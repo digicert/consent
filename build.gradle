@@ -206,6 +206,8 @@ subprojects {
 		testImplementation 'org.apache.kafka:kafka-clients:2.8.0'
 		testImplementation 'org.testcontainers:testcontainers:1.19.4'
 		testImplementation 'org.testcontainers:mariadb:1.19.4'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'org.mockito:mockito-core'
 	}
 
 	check.dependsOn jacocoTestCoverageVerification
