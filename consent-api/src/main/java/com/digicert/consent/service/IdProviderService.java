@@ -1,7 +1,7 @@
 package com.digicert.consent.service;
 
 import com.digicert.consent.dto.IdentityProviderStatusEvent;
-import com.digicert.consent.dto.StatusEvent;
+import com.digicert.consent.dto.StatusEventDto;
 import com.digicert.consent.entities.IdProviderStatusEntity;
 import com.digicert.consent.repositories.IdProviderStatusRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +22,7 @@ public class IdProviderService {
     private SimpMessagingTemplate messagingTemplate;
 
     public Boolean updateIdProviderStatus(String message) {
-        StatusEvent eventDetails = getEventDetails(message);
+        StatusEventDto eventDetails = getEventDetails(message);
         Optional<IdProviderStatusEntity> foundEntityOpt = idProviderStatusRepository.findIdProviderStatusEntitiesByIdentId(eventDetails.getIdentId());
         if (foundEntityOpt.isPresent()) {
             return updateStatusEntity(foundEntityOpt.get(), eventDetails);
@@ -31,11 +31,11 @@ public class IdProviderService {
         }
     }
 
-    private void notifyClient(StatusEvent eventDetails) {
+    private void notifyClient(StatusEventDto eventDetails) {
         messagingTemplate.convertAndSend("/topic/data-updates", eventDetails);
     }
 
-    private Boolean updateStatusEntity(IdProviderStatusEntity foundEntity, StatusEvent eventDetails) {
+    private Boolean updateStatusEntity(IdProviderStatusEntity foundEntity, StatusEventDto eventDetails) {
         foundEntity.setStatus(eventDetails.getStatus());
         foundEntity.setStatusDate(Date.from(Instant.now()));
         IdProviderStatusEntity savedEntity = idProviderStatusRepository.save(foundEntity);
@@ -47,7 +47,7 @@ public class IdProviderService {
         }
     }
 
-    private Boolean insertStatusEntity(StatusEvent eventDetails) {
+    private Boolean insertStatusEntity(StatusEventDto eventDetails) {
         IdProviderStatusEntity createdEntity = idProviderStatusRepository.save(IdProviderStatusEntity.builder()
                 .identId(eventDetails.getIdentId())
                 .status(eventDetails.getStatus())
@@ -62,11 +62,11 @@ public class IdProviderService {
         }
     }
 
-    private StatusEvent getEventDetails(String message) {
+    private StatusEventDto getEventDetails(String message) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             IdentityProviderStatusEvent providerEvent = mapper.readValue(message, IdentityProviderStatusEvent.class);
-            return StatusEvent.builder()
+            return StatusEventDto.builder()
                     .identId(providerEvent.getData().getIdentId())
                     .providerName(providerEvent.getData().getProviderName())
                     .status(providerEvent.getData().getStatus())

@@ -9,3 +9,16 @@ spring:
 
     profiles:
       active: local
+
+email:
+  verfication-email: qv.cas.nl@digicert.com
+
+server:
+  port: 8092
+  error:
+    include-binding-errors: always
+    include-message: always
+logging:
+  level:
+    sql: debug
+    org.hibernate.orm.jdbc.bind: trace

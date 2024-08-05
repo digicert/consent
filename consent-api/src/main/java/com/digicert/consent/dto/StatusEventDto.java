@@ -11,7 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StatusEvent {
+public class StatusEventDto {
 
     private String status;
     private String identId;

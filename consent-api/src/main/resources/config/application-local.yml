@@ -12,14 +12,8 @@ spring:
   jpa:
     show-sql: true
 
+digimail:
+  base-url: http://localhost:8088
+  path: /platform/email
 
 
-server:
-  port: 8081
-  error:
-    include-binding-errors: always
-    include-message: always
-logging:
-  level:
-    sql: debug
-    org.hibernate.orm.jdbc.bind: trace

@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.digicert.consent")
 @EnableConfigurationProperties({LanguageConfig.class, LocaleConfig.class,
     LanguageLocaleConfig.class, ConsentTemplateConfig.class, ProductConfig.class,
     ProductTemplateConfig.class})

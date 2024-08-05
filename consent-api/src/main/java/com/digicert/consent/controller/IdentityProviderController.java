@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("consent/identity-provider")
+@RequestMapping("identity-provider")
 @AllArgsConstructor
 public class IdentityProviderController {
 

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class IdentityProviderStatusEvent {
 
     private int version;
-    private StatusEvent data;
+    private StatusEventDto data;
     private String id = UUID.randomUUID().toString();
     private String queuedDate = new Date().toString();
     private int retryCount;
