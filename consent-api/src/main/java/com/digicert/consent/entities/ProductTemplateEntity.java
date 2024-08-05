@@ -37,13 +37,4 @@ public class ProductTemplateEntity {
 
     @Column(name = "template")
     private String template;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    private ProductEntity productEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "consent_template_id", insertable = false, updatable = false)
-    private ConsentTemplateEntity consentTemplateEntity;
-
 }

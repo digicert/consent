@@ -32,12 +32,4 @@ public class LocaleLanguageEntity {
     @Column(name = "language_id")
     private String languageId;
 
-    @ManyToOne
-    @JoinColumn(name = "locale_id" , insertable = false, updatable = false)
-    private LocaleEntity localeEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "language_id", insertable = false, updatable = false)
-    private LanguageEntity languageEntity;
-
 }

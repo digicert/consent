@@ -35,9 +35,4 @@ public class ConsentTemplateEntity {
 
     @Column(name = "type")
     private String type;
-
-    @ManyToOne
-    @JoinColumn(name = "locale_language_id" , insertable = false, updatable = false)
-    private LocaleLanguageEntity localeLanguageEntity;
-
 }

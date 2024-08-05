@@ -27,5 +27,18 @@ public interface ClientConsentRepository extends JpaRepository<ClientConsentEnti
                                                                @Param("productId") String productId,
                                                                @Param("localeId") String localeId);
 
+    @Query(value = "SELECT cc FROM ClientConsentEntity cc " +
+            "JOIN ProductTemplateEntity pt on cc.productTemplateId = pt.id " +
+            "JOIN ConsentTemplateEntity ct on pt.consentTemplateId = ct.id " +
+            "JOIN ProductEntity p on pt.productId = p.id " +
+            "JOIN ConsentTemplateEntity cte on pt.consentTemplateId = cte.id " +
+            "WHERE cc.individualId = :individualId " +
+            "AND p.id = :productId " +
+            "ORDER BY cc.date DESC", nativeQuery = false)
+    Optional<ClientConsentEntity>
+    findClientConsentEntityByIndividualIdAndProductId(String individualId, String productId);
+
+
+
 
 }

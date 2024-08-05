@@ -42,8 +42,4 @@ public class ClientConsentEntity {
     @Column(name = "optout_reason")
     private String optOutReason;
 
-    @ManyToOne
-    @JoinColumn(name = "product_template_id" , insertable = false, updatable = false)
-    private ProductTemplateEntity productTemplateEntity;
-
 }
