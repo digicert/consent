@@ -76,13 +76,6 @@ public class ClientConsentService {
     public ClientConsentEntity findPreviousClientConsent(String individualId, String productName, String locale) {
         Optional<ProductEntity> productEntity =
                 productRepository.findByName(productName);
-        Optional<ClientConsentEntity> clientConsentIndividual =
-                clientConsentRepository.findClientConsentEntityByIndividualId(individualId);
-        Optional<LocaleEntity> localeEntity =
-                localeRepository.findByLocale(locale);
-        Optional<LocaleLanguageEntity> localeLanguageEntity =
-                languageLocaleRepository.findByLocaleId(localeEntity.get().getId());
-
         if (!productEntity.isPresent()) {
             return null;
         }
