@@ -1,4 +1,4 @@
-package com.digicert.consent.config.model;
+package com.digicert.consent.config;
 
 import com.digicert.consent.config.RestTemplateConfiguration;
 import org.junit.jupiter.api.Test;

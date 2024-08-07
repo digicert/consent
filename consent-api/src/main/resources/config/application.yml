@@ -15,10 +15,8 @@ email:
 
 server:
   port: 8092
+  servlet:
+    context-path: /consent/
   error:
     include-binding-errors: always
     include-message: always
-logging:
-  level:
-    sql: debug
-    org.hibernate.orm.jdbc.bind: trace

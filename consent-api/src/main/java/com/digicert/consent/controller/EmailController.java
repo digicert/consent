@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("email")
+@RequestMapping("api/v1")
 public class EmailController {
 
     @Autowired
     private EmailService emailService;
 
 
-    @PostMapping("/verification-request/send")
+    @PostMapping("email/verification-request/send")
     public ResponseEntity<?> sendVerificationRequest(@RequestBody VerificationEmailRequestDto emailRequest) {
         emailService.sendFaceToFaceVerificationEmail(emailRequest);
         return ResponseEntity.ok().build();

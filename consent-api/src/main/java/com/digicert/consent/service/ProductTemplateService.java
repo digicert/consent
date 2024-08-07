@@ -2,7 +2,7 @@ package com.digicert.consent.service;
 
 import com.digicert.consent.config.ProductTemplateConfig;
 import com.digicert.consent.config.initializer.CustomInitializer;
-import com.digicert.consent.config.model.ProductTemplateModel;
+import com.digicert.consent.config.ProductTemplateModel;
 import com.digicert.consent.entities.ConsentTemplateEntity;
 import com.digicert.consent.entities.ProductEntity;
 import com.digicert.consent.entities.ProductTemplateEntity;

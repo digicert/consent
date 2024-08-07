@@ -1,4 +1,4 @@
-package com.digicert.consent.config.model;
+package com.digicert.consent.config;
 
 import lombok.Getter;
 import lombok.Setter;

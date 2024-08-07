@@ -2,7 +2,7 @@ package com.digicert.consent.service;
 
 import com.digicert.consent.config.ProductConfig;
 import com.digicert.consent.config.initializer.CustomInitializer;
-import com.digicert.consent.config.model.ProductModel;
+import com.digicert.consent.config.ProductModel;
 import com.digicert.consent.entities.ProductEntity;
 import com.digicert.consent.repositories.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

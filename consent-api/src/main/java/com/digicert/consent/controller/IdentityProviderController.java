@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("consent/identity-provider")
+@RequestMapping("api/v1")
 @AllArgsConstructor
 public class IdentityProviderController {
 
     private IdProviderService idProviderService;
 
-    @PostMapping("/status")
+    @PostMapping("identity-provider/status")
     public ResponseEntity<Boolean> updateStatus(@RequestBody String message) {
         return ResponseEntity.ok(idProviderService.updateIdProviderStatus(message));
     }
